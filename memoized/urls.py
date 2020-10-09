@@ -15,22 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from posts.views import (
-    PostViewSet, UpvoteViewSet, DownvoteViewSet,
-    PinnedPostViewSet, TagViewSet, CollectionViewSet
-)
+from django.views.generic import TemplateView
 
-router = DefaultRouter()
-router.register(r'posts', PostViewSet, basename='posts')
-router.register(r'upvotes', UpvoteViewSet, basename='upvotes')
-router.register(r'downvotes', DownvoteViewSet, basename='downvotes')
-router.register(r'pinnedposts', PinnedPostViewSet, basename='pinnedposts')
-router.register(r'tags', TagViewSet, basename='tags')
-router.register(r'collections', CollectionViewSet, basename='collections')
+from memoized.views import HealthCheckView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls')),
-    path('api/', include(router.urls))
+    # path('api/', include('rest_framework.urls')),
+    path('health/', HealthCheckView.as_view(), name='health'),
+    path('api/', include(('api.urls', 'api'), namespace='api')),
+    path('', TemplateView.as_view(template_name='memoized_frontend/build/index.html')),
 ]
