@@ -1,0 +1,25 @@
+version: '3'
+#version: '2.2'
+    
+services:
+  memoized-db:
+    image: postgres
+    env_file:
+      - ./docker-compose-vars.env
+    ports:
+      - "5444:5432"
+    volumes:
+      - postgres-memoized-vol:/var/lib/postgressql/data
+  memoized-app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./docker-compose-vars.env
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8000"
+    depends_on:
+      - memoized-db
+volumes: 
+  postgres-memoized-vol:

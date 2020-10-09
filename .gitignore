@@ -1,0 +1,3 @@
+docker-compose-vars.env
+*.pyc
+__pycache__/
