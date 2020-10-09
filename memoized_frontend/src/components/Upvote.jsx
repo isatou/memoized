@@ -13,10 +13,10 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-export default function Upvote() {
+export default function Upvote(props) {
   return (
     <IconButton aria-label="cart">
-      <StyledBadge badgeContent={4} color="secondary">
+      <StyledBadge badgeContent={props.count == 0 ? '0': props.count} color="secondary">
         <ThumbUpOutlined />
       </StyledBadge>
     </IconButton>
