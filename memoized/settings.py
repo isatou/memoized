@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     #'corsheaders.middleware.CorsMiddleware',
-    'posts.middleware.CorsMiddleware',
+    'memoized.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'memoized.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,11 +128,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+REACT_APP_DIR = os.path.join(BASE_DIR, 'memoized_frontend')
+
+STATICFILES_DIRS = (
+    os.path.join(REACT_APP_DIR, 'build', 'static'),
+)
+
 # django rest framework
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
 }
