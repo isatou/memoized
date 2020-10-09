@@ -18,14 +18,14 @@ class Post(BaseAppModelMixin):
     content = models.TextField()
     link = models.URLField(blank=True, null=True)
     added_by = models.ForeignKey(User, null=False, blank=False,
-        on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE)
     is_published = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     is_flagged = models.BooleanField(default=False)
     category = models.IntegerField(choices=POST_CATEGORIES, null=False,
-    blank=False)
+                                   blank=False)
     tags = models.TextField(null=True, blank=True)
 
     def __str__(self):
@@ -33,27 +33,33 @@ class Post(BaseAppModelMixin):
 
 
 class Upvote(BaseAppModelMixin):
-    post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
-    voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-
+    post = models.ForeignKey(Post, null=False, blank=False,
+                             on_delete=models.CASCADE)
+    voted_by = models.ForeignKey(User, null=False, blank=False,
+                                 on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s - %s' % (self.voted_by.user.id, self.post.id)
+        return '%s - %s' % (self.voted_by.id, self.post.id)
 
 
 class Downvote(BaseAppModelMixin):
-    post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
-    voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, null=False, blank=False,
+                             on_delete=models.CASCADE)
+    voted_by = models.ForeignKey(User, null=False, blank=False,
+                                 on_delete=models.CASCADE)
 
     def __str_(self):
-        return '%s - %s' % (self.voted_by.user.id, self.post.id)
+        return '%s - %s' % (self.voted_by.id, self.post.id)
+
 
 class PinnedPost(BaseAppModelMixin):
-    post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
-    pinned_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, null=False, blank=False,
+                             on_delete=models.CASCADE)
+    pinned_by = models.ForeignKey(User, null=False, blank=False,
+                                  on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s - %s' % (self.pinned_by.user.id, self.post.id)
+        return '%s - %s' % (self.pinned_by.id, self.post.id)
 
 
 class Tag(BaseAppModelMixin):
@@ -64,29 +70,38 @@ class Tag(BaseAppModelMixin):
 
 
 class Collection(BaseAppModelMixin):
-    name = models.CharField(max_length=25, blank=False, null=False, unique=True)
+    name = models.CharField(max_length=25, blank=False, null=False,
+                            unique=True)
     description = models.TextField()
-    post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, null=False, blank=False,
+                             on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, null=False, blank=False,
+                                   on_delete=models.CASCADE)
     is_private = models.BooleanField(default=True)
     tags = models.TextField()
+    upvotes = models.IntegerField(default=0)
+    downvotes = models.IntegerField(default=0)
+    is_published = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
 
-
 class UpvoteCollection(BaseAppModelMixin):
-    collection = models.ForeignKey(Collection, null=False, blank=False, on_delete=models.CASCADE)
-    voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, null=False, blank=False,
+                                   on_delete=models.CASCADE)
+    voted_by = models.ForeignKey(User, null=False, blank=False,
+                                 on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s - %s' % (self.voted_by.user.id, self.post.id)
+        return '%s - %s' % (self.voted_by.id, self.post.id)
 
 
 class DownvoteCollection(BaseAppModelMixin):
-    collection = models.ForeignKey(Collection, null=False, blank=False, on_delete=models.CASCADE)
-    voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, null=False, blank=False,
+                                   on_delete=models.CASCADE)
+    voted_by = models.ForeignKey(User, null=False, blank=False,
+                                 on_delete=models.CASCADE)
 
     def __str_(self):
-        return '%s - %s' % (self.voted_by.user.id, self.post.id)
+        return '%s - %s' % (self.voted_by.id, self.post.id)

@@ -2,7 +2,9 @@ from rest_framework import serializers
 
 from posts.models import (
     Post, Upvote, Downvote, PinnedPost,
-    Tag, Collection)
+    Tag, Collection,
+    UpvoteCollection, DownvoteCollection
+)
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -20,6 +22,18 @@ class UpvoteSerializer(serializers.ModelSerializer):
 class DownvoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Downvote
+        fields = '__all__'
+
+
+class UpvoteCollectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UpvoteCollection
+        fields = '__all__'
+
+
+class DownvoteCollectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DownvoteCollection
         fields = '__all__'
 
 

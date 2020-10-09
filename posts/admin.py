@@ -1,9 +1,8 @@
 from django.contrib import admin
 from posts.models import (
     Post, Upvote, Downvote, PinnedPost,
-    Tag, Collection)
-
-# Register your models here.
+    Tag, Collection,
+    DownvoteCollection, UpvoteCollection)
 
 
 @admin.register(Post)
@@ -33,4 +32,14 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(UpvoteCollection)
+class UpvoteCollectionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(DownvoteCollection)
+class DownvoteCollectionAdmin(admin.ModelAdmin):
     pass
