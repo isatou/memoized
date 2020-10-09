@@ -24,8 +24,9 @@ class Post(models.Model):
     downvotes = models.IntegerField(default=0)
     is_flagged = models.BooleanField(default=False)
     category = models.IntegerField(choices=POST_CATEGORIES, null=False, blank=False)
+    tags = models.TextField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -33,7 +34,7 @@ class Upvote(models.Model):
     post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
     voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s - %s' % (self.voted_by.user.id, self.post.id)
 
 
@@ -41,7 +42,7 @@ class Downvote(models.Model):
     post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
     voted_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str_(self):
         return '%s - %s' % (self.voted_by.user.id, self.post.id)
 
 
@@ -49,14 +50,14 @@ class PinnedPost(models.Model):
     post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
     pinned_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s - %s' % (self.pinned_by.user.id, self.post.id)
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=25, blank=False, null=False)
 
-    def __unicode__(self):
+    def __str_(self):
         return self.name
 
 
@@ -65,7 +66,8 @@ class Collection(models.Model):
     description = models.TextField()
     post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-    is_admin = models.BooleanField(default=False) # is_featured?
+    is_private = models.BooleanField(default=True)
+    tags = models.TextField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

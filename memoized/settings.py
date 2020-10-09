@@ -39,16 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'rest_framework',
-    'corsheaders',
     #'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     #'corsheaders.middleware.CorsMiddleware',
-    #'posts.middleware.CorsMiddleware',
+    'posts.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,45 +54,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000',]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',]
-
-
-"""CORS_ORIGIN_ALLOW_ALL = True
-
-
-CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
-CORS_ORIGIN_REGEX_WHITELIST = [
-    'http://localhost:3000',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
-
-
-if DEBUG:
-    # this should only be used for localhost
-    CORS_ORIGIN_ALLOW_ALL = True
-    ALLOWED_HOSTS = ['*']
-    CORS_ORIGIN_WHITELIST = [
-        "http://localhost:3000",
-        "http://localhost:8001",
-    ]
-from corsheaders.defaults import default_headers
-
-CORS_ALLOW_HEADERS = default_headers + (
-        'Cache-Control', 'If-Modified-Since',
-)
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False"""
 
 ROOT_URLCONF = 'memoized.urls'
 

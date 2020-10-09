@@ -1,7 +1,7 @@
 from django import http
 
 
-class CorsMiddleware2(object):
+class CorsMiddleware(object):
     def __init__(self, get_response):
         self.get_response = get_response
 
