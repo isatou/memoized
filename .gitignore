@@ -1,0 +1,4 @@
+docker-compose-vars.env
+*.pyc
+__pycache__/
+.idea
